@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>طاها لروند · Full-Stack Developer</title>
+
+    <!-- ===== TAILWIND CSS (CDN) ===== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Vazir Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* ========== OVERRIDE & CUSTOM STYLES (با تیلویند ترکیب شده) ========== */
+        :root {
+            --primary-red: #C62828;
+            --primary-red-light: #EF5350;
+            --primary-red-dark: #B71C1C;
+            --dark: #1E1E2F;
+            --dark-soft: #2D2D44;
+            --gray: #6C6C8A;
+            --gray-light: #E8E8F0;
+            --gray-lighter: #F5F5FA;
+            --white: #FFFFFF;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.14);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Vazir', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gray-lighter);
+            color: var(--dark);
+            line-height: 1.7;
+            direction: rtl;
+            unicode-bidi: plaintext;
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 100vh;
+            transition: font-family 0.3s ease;
+        }
+
+        body.lang-en {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-lighter);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-red);
+            border-radius: 10px;
+        }
+
+        /* ========== SIDEBAR ========== */
+        .sidebar {
+            width: 25%;
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-left: 1px solid var(--gray-light);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.03);
+        }
+
+        html[dir="ltr"] .sidebar {
+            border-left: none;
+            border-right: 1px solid var(--gray-light);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .sidebar-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+        }
+
+        .profile-head {
+            border-bottom: 2px solid var(--gray-light);
+            padding-bottom: 1.5rem;
+        }
+
+        /* ===== AVATAR IMAGE ===== */
+        .avatar-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 14px rgba(198, 40, 40, 0.25);
+            border: 3px solid var(--white);
+            background: var(--gray-lighter);
+            display: block;
+        }
+
+        .name-fa {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: var(--dark);
+        }
+
+        .job-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-top: 0.2rem;
+            background: rgba(198, 40, 40, 0.08);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+        }
+
+        .divider-accent {
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-red-light));
+            margin-top: 0.8rem;
+            border-radius: 4px;
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            font-size: 0.92rem;
+        }
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--dark);
+            padding: 0.3rem 0;
+            border-bottom: 1px dashed var(--gray-light);
+            padding-bottom: 0.5rem;
+        }
+        .contact-list li:last-child {
+            border-bottom: none;
+        }
+        .contact-list i {
+            width: 1.4rem;
+            color: var(--primary-red);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .contact-list a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .contact-list a:hover {
+            color: var(--primary-red);
+        }
+        .highlight-red {
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+
+        .section-title-side {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid var(--gray-light);
+            padding-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .lang-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .lang-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.92rem;
+            padding: 0.2rem 0;
+        }
+        .lang-name {
+            font-weight: 500;
+        }
+        .lang-stars {
+            color: #f5b342;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            direction: ltr;
+            unicode-bidi: plaintext;
+        }
+        .lang-stars .empty-star {
+            color: #ddd;
+        }
+
+        .social-side .social-icons {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.3rem;
+        }
+        .social-side .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.4rem;
+            height: 2.4rem;
+            border-radius: 50%;
+            background: var(--gray-lighter);
+            color: var(--dark);
+            border: none;
+            transition: all var(--transition);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .social-side .social-icons a:hover {
+            background: var(--primary-red);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(198, 40, 40, 0.25);
+        }
+
+        /* ========== LANGUAGE TOGGLE ========== */
+        .lang-toggle {
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+        .lang-toggle button {
+            background: var(--gray-lighter);
+            border: none;
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: inherit;
+        }
+        .lang-toggle button.active {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+        .lang-toggle button:hover:not(.active) {
+            background: var(--gray-light);
+        }
+        .lang-toggle span {
+            color: var(--gray);
+            font-size: 0.7rem;
+            margin: 0 0.2rem;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            width: 75%;
+            padding: 0;
+            background: var(--gray-lighter);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            padding: 2.5rem 3.5rem 2.5rem 3rem;
+            max-width: 1500px;
+        }
+
+        /* ========== SECTIONS ========== */
+        .section {
+            margin-bottom: 3.5rem;
+            background: var(--white);
+            padding: 2rem 2.2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: box-shadow var(--transition);
+        }
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .accent-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, var(--primary-red), var(--primary-red-light));
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .about-text {
+            font-size: 1rem;
+            line-height: 2;
+            color: var(--dark-soft);
+            max-width: 95%;
+        }
+
+        /* ========== SKILLS ========== */
+        .skills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .skill-group {
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--radius-sm);
+            border-bottom: 1px solid var(--gray-lighter);
+            transition: all var(--transition);
+            cursor: default;
+        }
+        .skill-group:last-child {
+            border-bottom: none;
+        }
+        .skill-group:hover {
+            background: rgba(198, 40, 40, 0.04);
+            transform: translateX(-4px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            border-color: var(--primary-red-light);
+        }
+        html[dir="ltr"] .skill-group:hover {
+            transform: translateX(4px);
+        }
+        .skill-group:hover .skill-category {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        .skill-category {
+            font-weight: 700;
+            color: var(--dark);
+            min-width: 140px;
+            font-size: 0.92rem;
+            background: var(--gray-lighter);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .skill-tags {
+            color: var(--dark-soft);
+            font-size: 0.95rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .skill-tags span {
+            background: var(--gray-lighter);
+            padding: 0.1rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--dark-soft);
+            transition: all var(--transition);
+        }
+        .skill-group:hover .skill-tags span {
+            background: rgba(198, 40, 40, 0.08);
+            color: var(--dark);
+        }
+
+        /* ========== EXPERIENCE CARDS ========== */
+        .exp-card {
+            border-right: 4px solid var(--gray-light);
+            padding-right: 1.5rem;
+            padding-bottom: 1.8rem;
+            margin-bottom: 1.8rem;
+            transition: border-color var(--transition), transform var(--transition);
+            position: relative;
+        }
+        .exp-card:hover {
+            border-right-color: var(--primary-red);
+            transform: translateX(-4px);
+        }
+        html[dir="ltr"] .exp-card {
+            border-right: none;
+            border-left: 4px solid var(--gray-light);
+            padding-right: 0;
+            padding-left: 1.5rem;
+        }
+        html[dir="ltr"] .exp-card:hover {
+            border-left-color: var(--primary-red);
+            transform: translateX(4px);
+        }
+        .exp-card:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .exp-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .exp-company {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .exp-date {
+            font-size: 0.8rem;
+            color: var(--gray);
+            background: var(--gray-lighter);
+            padding: 0.1rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        .exp-position {
+            font-weight: 600;
+            color: var(--primary-red);
+            margin: 0.2rem 0 0.3rem;
+            font-size: 0.92rem;
+        }
+
+        .exp-desc {
+            color: var(--dark-soft);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 0.4rem;
+        }
+
+        .exp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--primary-red);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all var(--transition);
+            background: rgba(198, 40, 40, 0.06);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+        }
+        .exp-link:hover {
+            background: var(--primary-red);
+            color: var(--white);
+            opacity: 1;
+        }
+        .exp-link i {
+            font-size: 0.7rem;
+        }
+
+        /* ========== LANGUAGES & SOCIAL (mobile) ========== */
+        .languages-main,
+        .social-main {
+            display: none;
+        }
+
+        .lang-list-main {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .lang-list-main li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            max-width: 220px;
+            padding: 0.2rem 0;
+            border-bottom: 1px solid var(--gray-lighter);
+        }
+        .lang-list-main .lang-stars {
+            font-size: 0.9rem;
+            color: #f5b342;
+            letter-spacing: 2px;
+            direction: ltr;
+            unicode-bidi: plaintext;
+        }
+        .lang-list-main .lang-stars .empty-star {
+            color: #ddd;
+        }
+
+        .social-icons-main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+        }
+        .social-icons-main a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all var(--transition);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            background: var(--gray-lighter);
+        }
+        .social-icons-main a:hover {
+            color: var(--white);
+            background: var(--primary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.25);
+        }
+
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--gray-light);
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 30%;
+                padding: 2rem 1.5rem;
+            }
+            .main-content {
+                width: 70%;
+            }
+            .content-wrapper {
+                padding: 1.5rem 2rem;
+            }
+            .section {
+                padding: 1.5rem 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-left: none !important;
+                border-right: none !important;
+                border-bottom: 2px solid var(--gray-light);
+                padding: 1.8rem;
+                gap: 1.8rem;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            }
+            .main-content {
+                width: 100%;
+            }
+            .content-wrapper {
+                padding: 1rem 1.2rem;
+            }
+            .section {
+                padding: 1.2rem 1.2rem;
+                border-radius: var(--radius-sm);
+            }
+            .about-text {
+                max-width: 100%;
+            }
+            .skill-category {
+                min-width: 100px;
+            }
+            .languages-main,
+            .social-main {
+                display: block;
+            }
+            .languages-side,
+            .social-side {
+                display: none;
+            }
+            .avatar-img {
+                width: 70px;
+                height: 70px;
+            }
+            .name-fa {
+                font-size: 1.6rem;
+            }
+            html[dir="ltr"] .exp-card {
+                border-left: none;
+                padding-left: 0;
+            }
+            html[dir="ltr"] .exp-card:hover {
+                transform: none;
+            }
+            .skill-group:hover {
+                transform: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-wrapper {
+                padding: 0.8rem 0.8rem;
+            }
+            .section {
+                padding: 1rem 1rem;
+            }
+            .exp-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .skill-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+            .skill-category {
+                min-width: auto;
+            }
+        }
+
+        /* ========== PRINT ========== */
+        @media print {
+            .sidebar {
+                width: 30%;
+                height: auto;
+                position: static;
+                border: none !important;
+                background: #f9fafb;
+                padding: 1.5rem;
+                box-shadow: none;
+            }
+            .main-content {
+                width: 70%;
+            }
+            .content-wrapper {
+                padding: 1.5rem;
+            }
+            .section {
+                box-shadow: none !important;
+                border: 1px solid #ddd;
+                padding: 1.2rem;
+            }
+            .section:hover {
+                box-shadow: none !important;
+            }
+            .exp-card:hover {
+                transform: none !important;
+            }
+            .social-side .social-icons a:hover {
+                transform: none !important;
+            }
+            .footer {
+                display: block !important;
+            }
+            .exp-link:hover {
+                background: transparent !important;
+                color: var(--primary-red) !important;
+            }
+            .skill-group:hover {
+                background: transparent !important;
+                transform: none !important;
+                box-shadow: none !important;
+            }
+            .skill-group:hover .skill-category {
+                background: var(--gray-lighter) !important;
+                color: var(--dark) !important;
+            }
+            .skill-group:hover .skill-tags span {
+                background: var(--gray-lighter) !important;
+                color: var(--dark-soft) !important;
+            }
+            html[dir="ltr"] .exp-card {
+                border-left: none !important;
+                padding-left: 0 !important;
+            }
+            html[dir="ltr"] .exp-card:hover {
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" role="complementary" aria-label="اطلاعات شخصی">
+        <div class="sidebar-inner">
+            <div class="profile-head">
+                <!-- عکس پروفایل -->
+                <img src="img.png" alt="طاها لروند" class="avatar-img" />
+                <h1 class="name-fa" data-i18n="name">طاها لروند</h1>
+                <span class="job-title" data-i18n="job_title">Full-Stack Developer</span>
+                <div class="divider-accent"></div>
+                <!-- Language Toggle -->
+                <div class="lang-toggle">
+                    <button id="lang-fa" class="active" data-lang="fa">فا</button>
+                    <span>|</span>
+                    <button id="lang-en" data-lang="en">EN</button>
+                </div>
+            </div>
+
+            <ul class="contact-list" aria-label="اطلاعات تماس">
+                <li><i class="fas fa-phone-alt" aria-hidden="true"></i> <a href="tel:09375760102">۰۹۳۷۵۷۶۰۱۰۲</a></li>
+                <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:taha.looorvand@gmail.com">taha.looorvand@gmail.com</a></li>
+                <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <span data-i18n="location">کرج، ایران</span></li>
+                <li><i class="fas fa-calendar-alt" aria-hidden="true"></i> <span data-i18n="birthdate">اردیبهشت ۱۳۹۰</span></li>
+                <li><i class="fas fa-briefcase" aria-hidden="true"></i> <span class="highlight-red" data-i18n="experience_badge">+۱ سال تجربه</span></li>
+            </ul>
+
+            <div class="languages-side">
+                <h2 class="section-title-side" data-i18n="languages_title">زبان‌ها</h2>
+                <ul class="lang-list">
+                    <li>
+                        <span class="lang-name" data-i18n="lang_en">انگلیسی</span>
+                        <span class="lang-stars" dir="ltr">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="lang-name" data-i18n="lang_de">آلمانی</span>
+                        <span class="lang-stars" dir="ltr">
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="social-side">
+                <h2 class="section-title-side" data-i18n="social_title">ارتباط</h2>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/taha-lorvand-673a86413/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/taha-developer-dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/@ch_taha_developer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://t.me/ch_taha_developer" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="https://www.instagram.com/ch_taha_developer" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content" role="main">
+        <div class="content-wrapper">
+            <!-- درباره من -->
+            <section id="about" class="section">
+                <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="about_title">درباره من</span></h2>
+                <p class="about-text" data-i18n="about_text">
+                    توسعه‌دهنده جوان و علاقه‌مند به ساخت نرم‌افزار و محصولات دیجیتال هستم. در مسیر یادگیری و توسعه حرفه‌ای، تجربه کار با تکنولوژی‌های مختلف توسعه وب را به دست آورده‌ام و به یادگیری سریع، خلاقیت و حل مسئله علاقه‌مندم. هدفم این است که با توسعه مداوم مهارت‌های فنی و تجربه کار روی پروژه‌های واقعی، به یک توسعه‌دهنده توانمند تبدیل شوم و در ساخت محصولات کاربردی و باکیفیت نقش داشته باشم.
+                </p>
+            </section>
+
+            <!-- مهارت‌ها -->
+            <section id="skills" class="section">
+                <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="skills_title">مهارت‌ها</span></h2>
+                <div class="skills-grid">
+                    <div class="skill-group">
+                        <span class="skill-category" data-i18n="skill_frontend">فرانت اند</span>
+                        <span class="skill-tags">
+                            <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>React</span>
+                            <span>Next.js</span> <span>Svelte</span> <span>Blazor</span>
+                        </span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-category" data-i18n="skill_languages">زبان‌های برنامه‌نویسی</span>
+                        <span class="skill-tags">
+                            <span>C#</span> <span>Python</span> <span>PHP</span> <span>JavaScript</span>
+                        </span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-category" data-i18n="skill_backend">بک اند</span>
+                        <span class="skill-tags">
+                            <span>.NET</span> <span>Laravel</span>
+                        </span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-category" data-i18n="skill_database">دیتابیس</span>
+                        <span class="skill-tags">
+                            <span>MySQL</span> <span>SQL Server</span>
+                        </span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-category" data-i18n="skill_design">دیزاین</span>
+                        <span class="skill-tags">
+                            <span>Figma</span> <span>Adobe Photoshop</span> <span>Adobe Illustrator</span>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- تجربه کاری -->
+            <section id="experience" class="section">
+                <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="experience_title">تجربه کاری</span></h2>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <span class="exp-company">AeroNext</span>
+                        <span class="exp-date" data-i18n="exp_aeronext_date">تیر ۱۴۰۵ – اکنون</span>
+                    </div>
+                    <p class="exp-position" data-i18n="exp_aeronext_pos">Full-Stack Developer · تهران</p>
+                    <p class="exp-desc" data-i18n="exp_aeronext_desc">توسعه سامانه جامع مدیریت شرکت‌های هواپیمایی و فعالیت در بخش Audit Management با استفاده از .NET، Blazor و SQL Server.</p>
+                    <a href="https://aeronext.ir/" target="_blank" rel="noopener noreferrer" class="exp-link">
+                        <span data-i18n="website_label">وب‌سایت</span>
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <span class="exp-company">SEL2PLUS</span>
+                        <span class="exp-date" data-i18n="exp_sel2plus_date">اسفند ۱۴۰۴ – اکنون</span>
+                    </div>
+                    <p class="exp-position" data-i18n="exp_sel2plus_pos">Full-Stack Developer · Remote</p>
+                    <p class="exp-desc" data-i18n="exp_sel2plus_desc">فعالیت در حوزه توسعه وب، طراحی سایت و ارائه خدمات میزبانی هاست و سرور.</p>
+                    <a href="https://sel2plus.ir/" target="_blank" rel="noopener noreferrer" class="exp-link">
+                        <span data-i18n="website_label">وب‌سایت</span>
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <span class="exp-company">CodePal</span>
+                        <span class="exp-date" data-i18n="exp_codepal_date">تیر ۱۴۰۴ – اکنون</span>
+                    </div>
+                    <p class="exp-position" data-i18n="exp_codepal_pos">Full-Stack Developer · Remote</p>
+                    <p class="exp-desc" data-i18n="exp_codepal_desc">مشارکت در توسعه و پیاده‌سازی یک پلتفرم تخصصی برای برنامه‌نویسان با تمرکز بر ایجاد تجربه‌ای کاربردی برای جامعه توسعه‌دهندگان.</p>
+                    <a href="https://codepal.ir/" target="_blank" rel="noopener noreferrer" class="exp-link">
+                        <span data-i18n="website_label">وب‌سایت</span>
+                        <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <span class="exp-company">Lifeino</span>
+                        <span class="exp-date" data-i18n="exp_lifeino_date">تیر ۱۴۰۵ – اکنون</span>
+                    </div>
+                    <p class="exp-position" data-i18n="exp_lifeino_pos">Founder &amp; Full-Stack Developer</p>
+                    <p class="exp-desc" data-i18n="exp_lifeino_desc">توسعه استارتاپ شخصی با تمرکز بر برنامه‌ریزی و مدیریت زندگی روزمره و تبدیل یک ایده به یک محصول دیجیتال کاربردی.</p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-header">
+                        <span class="exp-company" data-i18n="exp_freelance_company">Freelance Projects</span>
+                    </div>
+                    <p class="exp-position" data-i18n="exp_freelance_pos">Full-Stack Developer</p>
+                    <p class="exp-desc" data-i18n="exp_freelance_desc">تجربه انجام و توسعه بیش از <span class="highlight-red">۵ پروژه فریلنسری</span> در زمینه طراحی و توسعه وب و محصولات دیجیتال.</p>
+                </div>
+            </section>
+
+            <!-- زبان‌ها (نمایش در موبایل) -->
+            <section id="languages" class="section languages-main">
+                <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="languages_title">زبان‌ها</span></h2>
+                <ul class="lang-list-main">
+                    <li>
+                        <span class="lang-name" data-i18n="lang_en">انگلیسی</span>
+                        <span class="lang-stars" dir="ltr">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="lang-name" data-i18n="lang_de">آلمانی</span>
+                        <span class="lang-stars" dir="ltr">
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                            <i class="far fa-star empty-star"></i>
+                        </span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- شبکه‌های اجتماعی (نمایش در موبایل) -->
+            <section id="social" class="section social-main">
+                <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="social_title">ارتباط</span></h2>
+                <div class="social-icons-main">
+                    <a href="https://www.linkedin.com/in/taha-lorvand-673a86413/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://github.com/taha-developer-dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.youtube.com/@ch_taha_developer" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="https://t.me/ch_taha_developer" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                    <a href="https://www.instagram.com/ch_taha_developer" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i> Instagram</a>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <p data-i18n="footer">&copy; ۲۰۲۶ طاها لروند · Full-Stack Developer</p>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ========== ANIMATION ON SCROLL ==========
+            const animateElements = document.querySelectorAll('.exp-card, .skill-group, .about-text');
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+
+            animateElements.forEach(function(el) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(18px)';
+                el.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(el);
+            });
+
+            // ========== MULTI-LANGUAGE SUPPORT ==========
+            const translations = {
+                fa: {
+                    name: 'طاها لروند',
+                    job_title: 'Full-Stack Developer',
+                    location: 'کرج، ایران',
+                    birthdate: 'اردیبهشت ۱۳۹۰',
+                    experience_badge: '+۱ سال تجربه',
+                    languages_title: 'زبان‌ها',
+                    lang_en: 'انگلیسی',
+                    lang_de: 'آلمانی',
+                    social_title: 'ارتباط',
+                    about_title: 'درباره من',
+                    about_text: 'توسعه‌دهنده جوان و علاقه‌مند به ساخت نرم‌افزار و محصولات دیجیتال هستم. در مسیر یادگیری و توسعه حرفه‌ای، تجربه کار با تکنولوژی‌های مختلف توسعه وب را به دست آورده‌ام و به یادگیری سریع، خلاقیت و حل مسئله علاقه‌مندم. هدفم این است که با توسعه مداوم مهارت‌های فنی و تجربه کار روی پروژه‌های واقعی، به یک توسعه‌دهنده توانمند تبدیل شوم و در ساخت محصولات کاربردی و باکیفیت نقش داشته باشم.',
+                    skills_title: 'مهارت‌ها',
+                    skill_frontend: 'فرانت اند',
+                    skill_languages: 'زبان‌های برنامه‌نویسی',
+                    skill_backend: 'بک اند',
+                    skill_database: 'دیتابیس',
+                    skill_design: 'دیزاین',
+                    experience_title: 'تجربه کاری',
+                    exp_aeronext_date: 'تیر ۱۴۰۵ – اکنون',
+                    exp_aeronext_pos: 'Full-Stack Developer · تهران',
+                    exp_aeronext_desc: 'توسعه سامانه جامع مدیریت شرکت‌های هواپیمایی و فعالیت در بخش Audit Management با استفاده از .NET، Blazor و SQL Server.',
+                    exp_sel2plus_date: 'اسفند ۱۴۰۴ – اکنون',
+                    exp_sel2plus_pos: 'Full-Stack Developer · Remote',
+                    exp_sel2plus_desc: 'فعالیت در حوزه توسعه وب، طراحی سایت و ارائه خدمات میزبانی هاست و سرور.',
+                    exp_codepal_date: 'تیر ۱۴۰۴ – اکنون',
+                    exp_codepal_pos: 'Full-Stack Developer · Remote',
+                    exp_codepal_desc: 'مشارکت در توسعه و پیاده‌سازی یک پلتفرم تخصصی برای برنامه‌نویسان با تمرکز بر ایجاد تجربه‌ای کاربردی برای جامعه توسعه‌دهندگان.',
+                    exp_lifeino_date: 'تیر ۱۴۰۵ – اکنون',
+                    exp_lifeino_pos: 'Founder & Full-Stack Developer',
+                    exp_lifeino_desc: 'توسعه استارتاپ شخصی با تمرکز بر برنامه‌ریزی و مدیریت زندگی روزمره و تبدیل یک ایده به یک محصول دیجیتال کاربردی.',
+                    exp_freelance_company: 'Freelance Projects',
+                    exp_freelance_pos: 'Full-Stack Developer',
+                    exp_freelance_desc: 'تجربه انجام و توسعه بیش از ۵ پروژه فریلنسری در زمینه طراحی و توسعه وب و محصولات دیجیتال.',
+                    website_label: 'وب‌سایت',
+                    footer: '© ۲۰۲۶ طاها لروند · Full-Stack Developer'
+                },
+                en: {
+                    name: 'Taha Lorvand',
+                    job_title: 'Full-Stack Developer',
+                    location: 'Karaj, Iran',
+                    birthdate: 'April 2011',
+                    experience_badge: '+1 Year Experience',
+                    languages_title: 'Languages',
+                    lang_en: 'English',
+                    lang_de: 'German',
+                    social_title: 'Connect',
+                    about_title: 'About Me',
+                    about_text: 'I am a young developer passionate about building software and digital products. On my learning and professional development path, I have gained experience with various web development technologies. I am interested in fast learning, creativity, and problem-solving. My goal is to become a skilled developer by continuously improving my technical skills and working on real projects, contributing to building useful and high-quality products.',
+                    skills_title: 'Skills',
+                    skill_frontend: 'Front-End',
+                    skill_languages: 'Programming Languages',
+                    skill_backend: 'Back-End & Frameworks',
+                    skill_database: 'Database',
+                    skill_design: 'Design',
+                    experience_title: 'Work Experience',
+                    exp_aeronext_date: 'Jul 2026 – Present',
+                    exp_aeronext_pos: 'Full-Stack Developer · Tehran',
+                    exp_aeronext_desc: 'Developing a comprehensive airline management system, focusing on Audit Management using .NET, Blazor, and SQL Server.',
+                    exp_sel2plus_date: 'Mar 2026 – Present',
+                    exp_sel2plus_pos: 'Full-Stack Developer · Remote',
+                    exp_sel2plus_desc: 'Involved in web development, website design, and hosting/server services.',
+                    exp_codepal_date: 'Jul 2025 – Present',
+                    exp_codepal_pos: 'Full-Stack Developer · Remote',
+                    exp_codepal_desc: 'Contributing to the development of a specialized platform for programmers, focusing on creating a practical experience for the developer community.',
+                    exp_lifeino_date: 'Jul 2026 – Present',
+                    exp_lifeino_pos: 'Founder & Full-Stack Developer',
+                    exp_lifeino_desc: 'Developing a personal startup focused on daily life planning and management, turning an idea into a practical digital product.',
+                    exp_freelance_company: 'Freelance Projects',
+                    exp_freelance_pos: 'Full-Stack Developer',
+                    exp_freelance_desc: 'Experience in developing over 5 freelance projects in web development and digital products.',
+                    website_label: 'Website',
+                    footer: '© 2026 Taha Lorvand · Full-Stack Developer'
+                }
+            };
+
+            let currentLang = 'fa';
+
+            function setLanguage(lang) {
+                currentLang = lang;
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key] !== undefined) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                const html = document.documentElement;
+                if (lang === 'en') {
+                    html.dir = 'ltr';
+                    html.lang = 'en';
+                    document.body.classList.add('lang-en');
+                } else {
+                    html.dir = 'rtl';
+                    html.lang = 'fa';
+                    document.body.classList.remove('lang-en');
+                }
+
+                document.getElementById('lang-fa').classList.toggle('active', lang === 'fa');
+                document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            }
+
+            document.getElementById('lang-fa').addEventListener('click', function(e) {
+                e.preventDefault();
+                setLanguage('fa');
+            });
+            document.getElementById('lang-en').addEventListener('click', function(e) {
+                e.preventDefault();
+                setLanguage('en');
+            });
+
+            setLanguage('fa');
+
+        })();
+    </script>
+</body>
+</html>
