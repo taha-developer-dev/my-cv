@@ -511,6 +511,100 @@
             box-shadow: none;
         }
 
+        /* ===== NOTIFICATION ===== */
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 1rem;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .notification-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.4s ease;
+            text-align: center;
+        }
+
+        .notification-box .close-btn {
+            position: absolute;
+            top: 0.8rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color var(--transition);
+            padding: 0.2rem 0.5rem;
+            line-height: 1;
+        }
+        .notification-box .close-btn:hover {
+            color: var(--primary-red);
+        }
+
+        .notification-box .icon {
+            font-size: 3.5rem;
+            color: var(--primary-red);
+            margin-bottom: 0.2rem;
+        }
+
+        .notification-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .notification-box p {
+            color: var(--dark-soft);
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .notification-box {
+                padding: 1.5rem 1.5rem;
+                margin: 1rem;
+            }
+            .notification-box h3 {
+                font-size: 1rem;
+            }
+            .notification-box p {
+                font-size: 0.85rem;
+            }
+        }
+
         @media (max-width: 1024px) {
             .sidebar {
                 width: 30%;
@@ -557,6 +651,7 @@
             }
             .skill-category {
                 min-width: 100px;
+                font-size: 0.85rem;
             }
             .languages-main,
             .social-main {
@@ -583,6 +678,23 @@
             .skill-group:hover {
                 transform: none !important;
             }
+
+            .skill-group {
+                padding: 0.75rem !important;
+                gap: 0.5rem !important;
+            }
+            .skill-group .skill-tags {
+                gap: 0.3rem !important;
+            }
+            .skill-group .skill-tags span {
+                font-size: 0.7rem !important;
+                padding: 0.1rem 0.5rem !important;
+            }
+            .skill-group .skill-category {
+                font-size: 0.8rem !important;
+                padding: 0.1rem 0.7rem !important;
+                min-width: 90px !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -597,12 +709,23 @@
                 align-items: flex-start;
             }
             .skill-group {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.3rem;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 0.3rem !important;
+                padding: 0.6rem !important;
             }
             .skill-category {
-                min-width: auto;
+                min-width: auto !important;
+                width: 100% !important;
+                font-size: 0.75rem !important;
+                padding: 0.1rem 0.5rem !important;
+            }
+            .skill-group .skill-tags span {
+                font-size: 0.65rem !important;
+                padding: 0.05rem 0.4rem !important;
+            }
+            .skill-group .skill-tags {
+                gap: 0.2rem !important;
             }
         }
 
@@ -663,11 +786,31 @@
             html[dir="ltr"] .exp-card:hover {
                 transform: none !important;
             }
+            .notification-overlay {
+                display: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- ===== NOTIFICATION ===== -->
+    <div id="notification" class="notification-overlay">
+        <div class="notification-box">
+            <button class="close-btn" id="closeNotification" aria-label="بستن پیام">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+
+            <p>
+                صرفاً این یک رزومه در قالب یک وبسایت هست.<br />
+                پورتفولیو و سایت شخصی در حال توسعه می‌باشد.
+            </p>
+        </div>
+    </div>
+
     <aside class="sidebar" role="complementary" aria-label="اطلاعات شخصی">
         <div class="sidebar-inner">
             <div class="profile-head">
@@ -751,7 +894,7 @@
                             <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Next.js</span>
                             <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Svelte</span>
                             <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Blazor</span>
-                            <span class="px-3 py-0.5 rounded-full text-sm  ">Tailwind CSS</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-0.5 rounded-full ">Tailwind CSS</span>
                         </span>
                     </div>
 
@@ -899,6 +1042,35 @@
         (function() {
             'use strict';
 
+            // ===== NOTIFICATION =====
+            const notification = document.getElementById('notification');
+            const closeBtn = document.getElementById('closeNotification');
+
+            function closeNotification() {
+                notification.style.opacity = '0';
+                notification.style.transform = 'scale(0.9)';
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 300);
+            }
+
+            closeBtn.addEventListener('click', closeNotification);
+
+            // Close on outside click (click on overlay)
+            notification.addEventListener('click', function(e) {
+                if (e.target === notification) {
+                    closeNotification();
+                }
+            });
+
+            // Close with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && notification.style.display !== 'none') {
+                    closeNotification();
+                }
+            });
+
+            // ===== ANIMATION ON SCROLL =====
             const animateElements = document.querySelectorAll('.exp-card, .skill-group, .about-text');
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
@@ -916,6 +1088,7 @@
                 observer.observe(el);
             });
 
+            // ===== MULTI-LANGUAGE SUPPORT =====
             const translations = {
                 fa: {
                     name: 'طاها لروند',
@@ -1034,4 +1207,4 @@
         })();
     </script>
 </body>
-</html>
+</html> 
