@@ -4,17 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>طاها لروند · Full-Stack Developer</title>
-
-    <!-- ===== TAILWIND CSS (CDN) ===== -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <!-- Vazir Font -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
-
     <style>
-        /* ========== OVERRIDE & CUSTOM STYLES (با تیلویند ترکیب شده) ========== */
         :root {
             --primary-red: #C62828;
             --primary-red-light: #EF5350;
@@ -32,7 +25,6 @@
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ========== RESET & BASE ========== */
         * {
             margin: 0;
             padding: 0;
@@ -60,7 +52,6 @@
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* ========== SCROLLBAR ========== */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -72,7 +63,6 @@
             border-radius: 10px;
         }
 
-        /* ========== SIDEBAR ========== */
         .sidebar {
             width: 25%;
             background: var(--white);
@@ -105,7 +95,6 @@
             padding-bottom: 1.5rem;
         }
 
-        /* ===== AVATAR IMAGE ===== */
         .avatar-img {
             width: 90px;
             height: 90px;
@@ -247,7 +236,6 @@
             box-shadow: 0 6px 16px rgba(198, 40, 40, 0.25);
         }
 
-        /* ========== LANGUAGE TOGGLE ========== */
         .lang-toggle {
             margin-top: 0.5rem;
             display: flex;
@@ -279,7 +267,6 @@
             margin: 0 0.2rem;
         }
 
-        /* ========== MAIN CONTENT ========== */
         .main-content {
             width: 75%;
             padding: 0;
@@ -293,7 +280,6 @@
             max-width: 1500px;
         }
 
-        /* ========== SECTIONS ========== */
         .section {
             margin-bottom: 3.5rem;
             background: var(--white);
@@ -334,39 +320,13 @@
             max-width: 95%;
         }
 
-        /* ========== SKILLS ========== */
-        .skills-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
         .skill-group {
-            display: flex;
-            align-items: baseline;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            padding: 0.5rem 0.8rem;
             border-radius: var(--radius-sm);
             border-bottom: 1px solid var(--gray-lighter);
-            transition: all var(--transition);
             cursor: default;
         }
         .skill-group:last-child {
             border-bottom: none;
-        }
-        .skill-group:hover {
-            background: rgba(198, 40, 40, 0.04);
-            transform: translateX(-4px);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-            border-color: var(--primary-red-light);
-        }
-        html[dir="ltr"] .skill-group:hover {
-            transform: translateX(4px);
-        }
-        .skill-group:hover .skill-category {
-            background: var(--primary-red);
-            color: var(--white);
         }
 
         .skill-category {
@@ -381,13 +341,11 @@
             transition: all var(--transition);
         }
 
-        .skill-tags {
-            color: var(--dark-soft);
-            font-size: 0.95rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
+        .skill-group:hover .skill-category {
+            background: var(--primary-red);
+            color: var(--white);
         }
+
         .skill-tags span {
             background: var(--gray-lighter);
             padding: 0.1rem 0.8rem;
@@ -401,7 +359,6 @@
             color: var(--dark);
         }
 
-        /* ========== EXPERIENCE CARDS ========== */
         .exp-card {
             border-right: 4px solid var(--gray-light);
             padding-right: 1.5rem;
@@ -488,7 +445,6 @@
             font-size: 0.7rem;
         }
 
-        /* ========== LANGUAGES & SOCIAL (mobile) ========== */
         .languages-main,
         .social-main {
             display: none;
@@ -555,7 +511,6 @@
             box-shadow: none;
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 1024px) {
             .sidebar {
                 width: 30%;
@@ -651,7 +606,6 @@
             }
         }
 
-        /* ========== PRINT ========== */
         @media print {
             .sidebar {
                 width: 30%;
@@ -714,16 +668,13 @@
 </head>
 
 <body>
-    <!-- ========== SIDEBAR ========== -->
     <aside class="sidebar" role="complementary" aria-label="اطلاعات شخصی">
         <div class="sidebar-inner">
             <div class="profile-head">
-                <!-- عکس پروفایل -->
                 <img src="img.png" alt="طاها لروند" class="avatar-img" />
                 <h1 class="name-fa" data-i18n="name">طاها لروند</h1>
                 <span class="job-title" data-i18n="job_title">Full-Stack Developer</span>
                 <div class="divider-accent"></div>
-                <!-- Language Toggle -->
                 <div class="lang-toggle">
                     <button id="lang-fa" class="active" data-lang="fa">فا</button>
                     <span>|</span>
@@ -778,56 +729,69 @@
         </div>
     </aside>
 
-    <!-- ========== MAIN CONTENT ========== -->
     <main class="main-content" role="main">
         <div class="content-wrapper">
-            <!-- درباره من -->
             <section id="about" class="section">
                 <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="about_title">درباره من</span></h2>
                 <p class="about-text" data-i18n="about_text">
-                    توسعه‌دهنده جوان و علاقه‌مند به ساخت نرم‌افزار و محصولات دیجیتال هستم. در مسیر یادگیری و توسعه حرفه‌ای، تجربه کار با تکنولوژی‌های مختلف توسعه وب را به دست آورده‌ام و به یادگیری سریع، خلاقیت و حل مسئله علاقه‌مندم. هدفم این است که با توسعه مداوم مهارت‌های فنی و تجربه کار روی پروژه‌های واقعی، به یک توسعه‌دهنده توانمند تبدیل شوم و در ساخت محصولات کاربردی و باکیفیت نقش داشته باشم.
+                    توسعه‌دهنده جوان و علاقه‌مند به ساخت وبسایت و محصولات دیجیتال هستم. در مسیر یادگیری و توسعه حرفه‌ای، تجربه کار با تکنولوژی‌های مختلف توسعه وب را به دست آورده‌ام و به یادگیری سریع، خلاقیت و حل مسئله علاقه‌مندم. هدفم این است که با توسعه مداوم مهارت‌های فنی و تجربه کار روی پروژه‌های واقعی، به یک توسعه‌دهنده توانمند تبدیل شوم و در ساخت محصولات کاربردی و باکیفیت نقش داشته باشم.
                 </p>
             </section>
 
-            <!-- مهارت‌ها -->
             <section id="skills" class="section">
                 <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="skills_title">مهارت‌ها</span></h2>
                 <div class="skills-grid">
-                    <div class="skill-group">
+                    <div class="skill-group bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-3 flex items-baseline gap-3 flex-wrap border-b border-gray-100 last:border-b-0">
                         <span class="skill-category" data-i18n="skill_frontend">فرانت اند</span>
-                        <span class="skill-tags">
-                            <span>HTML</span> <span>CSS</span> <span>JavaScript</span> <span>React</span>
-                            <span>Next.js</span> <span>Svelte</span> <span>Blazor</span>
+                        <span class="skill-tags flex flex-wrap gap-2">
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">HTML</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">CSS</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">JavaScript</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">React</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Next.js</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Svelte</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Blazor</span>
+                            <span class="px-3 py-0.5 rounded-full text-sm  ">Tailwind CSS</span>
                         </span>
                     </div>
-                    <div class="skill-group">
+
+                    <div class="skill-group bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-3 flex items-baseline gap-3 flex-wrap border-b border-gray-100 last:border-b-0">
                         <span class="skill-category" data-i18n="skill_languages">زبان‌های برنامه‌نویسی</span>
-                        <span class="skill-tags">
-                            <span>C#</span> <span>Python</span> <span>PHP</span> <span>JavaScript</span>
+                        <span class="skill-tags flex flex-wrap gap-2">
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">C#</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Python</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">PHP</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">JavaScript</span>
                         </span>
                     </div>
-                    <div class="skill-group">
+
+                    <div class="skill-group bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-3 flex items-baseline gap-3 flex-wrap border-b border-gray-100 last:border-b-0">
                         <span class="skill-category" data-i18n="skill_backend">بک اند</span>
-                        <span class="skill-tags">
-                            <span>.NET</span> <span>Laravel</span>
+                        <span class="skill-tags flex flex-wrap gap-2">
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">.NET</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Laravel</span>
                         </span>
                     </div>
-                    <div class="skill-group">
+
+                    <div class="skill-group bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-3 flex items-baseline gap-3 flex-wrap border-b border-gray-100 last:border-b-0">
                         <span class="skill-category" data-i18n="skill_database">دیتابیس</span>
-                        <span class="skill-tags">
-                            <span>MySQL</span> <span>SQL Server</span>
+                        <span class="skill-tags flex flex-wrap gap-2">
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">MySQL</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">SQL Server</span>
                         </span>
                     </div>
-                    <div class="skill-group">
+
+                    <div class="skill-group bg-white shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-3 flex items-baseline gap-3 flex-wrap border-b border-gray-100 last:border-b-0">
                         <span class="skill-category" data-i18n="skill_design">دیزاین</span>
-                        <span class="skill-tags">
-                            <span>Figma</span> <span>Adobe Photoshop</span> <span>Adobe Illustrator</span>
+                        <span class="skill-tags flex flex-wrap gap-2">
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Figma</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Adobe Photoshop</span>
+                            <span class="bg-gray-100 px-3 py-0.5 rounded-full text-sm">Adobe Illustrator</span>
                         </span>
                     </div>
                 </div>
             </section>
 
-            <!-- تجربه کاری -->
             <section id="experience" class="section">
                 <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="experience_title">تجربه کاری</span></h2>
 
@@ -849,7 +813,7 @@
                         <span class="exp-company">SEL2PLUS</span>
                         <span class="exp-date" data-i18n="exp_sel2plus_date">اسفند ۱۴۰۴ – اکنون</span>
                     </div>
-                    <p class="exp-position" data-i18n="exp_sel2plus_pos">Full-Stack Developer · Remote</p>
+                    <p class="exp-position" data-i18n="exp_sel2plus_pos">Full-Stack Developer · Head of Technology</p>
                     <p class="exp-desc" data-i18n="exp_sel2plus_desc">فعالیت در حوزه توسعه وب، طراحی سایت و ارائه خدمات میزبانی هاست و سرور.</p>
                     <a href="https://sel2plus.ir/" target="_blank" rel="noopener noreferrer" class="exp-link">
                         <span data-i18n="website_label">وب‌سایت</span>
@@ -862,7 +826,7 @@
                         <span class="exp-company">CodePal</span>
                         <span class="exp-date" data-i18n="exp_codepal_date">تیر ۱۴۰۴ – اکنون</span>
                     </div>
-                    <p class="exp-position" data-i18n="exp_codepal_pos">Full-Stack Developer · Remote</p>
+                    <p class="exp-position" data-i18n="exp_codepal_pos">Full-Stack Developer · Head of Technology</p>
                     <p class="exp-desc" data-i18n="exp_codepal_desc">مشارکت در توسعه و پیاده‌سازی یک پلتفرم تخصصی برای برنامه‌نویسان با تمرکز بر ایجاد تجربه‌ای کاربردی برای جامعه توسعه‌دهندگان.</p>
                     <a href="https://codepal.ir/" target="_blank" rel="noopener noreferrer" class="exp-link">
                         <span data-i18n="website_label">وب‌سایت</span>
@@ -888,7 +852,6 @@
                 </div>
             </section>
 
-            <!-- زبان‌ها (نمایش در موبایل) -->
             <section id="languages" class="section languages-main">
                 <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="languages_title">زبان‌ها</span></h2>
                 <ul class="lang-list-main">
@@ -915,7 +878,6 @@
                 </ul>
             </section>
 
-            <!-- شبکه‌های اجتماعی (نمایش در موبایل) -->
             <section id="social" class="section social-main">
                 <h2 class="section-title"><span class="accent-dot"></span><span data-i18n="social_title">ارتباط</span></h2>
                 <div class="social-icons-main">
@@ -937,7 +899,6 @@
         (function() {
             'use strict';
 
-            // ========== ANIMATION ON SCROLL ==========
             const animateElements = document.querySelectorAll('.exp-card, .skill-group, .about-text');
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
@@ -955,7 +916,6 @@
                 observer.observe(el);
             });
 
-            // ========== MULTI-LANGUAGE SUPPORT ==========
             const translations = {
                 fa: {
                     name: 'طاها لروند',
@@ -968,7 +928,7 @@
                     lang_de: 'آلمانی',
                     social_title: 'ارتباط',
                     about_title: 'درباره من',
-                    about_text: 'توسعه‌دهنده جوان و علاقه‌مند به ساخت نرم‌افزار و محصولات دیجیتال هستم. در مسیر یادگیری و توسعه حرفه‌ای، تجربه کار با تکنولوژی‌های مختلف توسعه وب را به دست آورده‌ام و به یادگیری سریع، خلاقیت و حل مسئله علاقه‌مندم. هدفم این است که با توسعه مداوم مهارت‌های فنی و تجربه کار روی پروژه‌های واقعی، به یک توسعه‌دهنده توانمند تبدیل شوم و در ساخت محصولات کاربردی و باکیفیت نقش داشته باشم.',
+                    about_text: 'توسعه‌دهنده جوان و علاقه‌مند به ساخت وبسایت و محصولات دیجیتال هستم. در مسیر یادگیری و توسعه حرفه‌ای، تجربه کار با تکنولوژی‌های مختلف توسعه وب را به دست آورده‌ام و به یادگیری سریع، خلاقیت و حل مسئله علاقه‌مندم. هدفم این است که با توسعه مداوم مهارت‌های فنی و تجربه کار روی پروژه‌های واقعی، به یک توسعه‌دهنده توانمند تبدیل شوم و در ساخت محصولات کاربردی و باکیفیت نقش داشته باشم.',
                     skills_title: 'مهارت‌ها',
                     skill_frontend: 'فرانت اند',
                     skill_languages: 'زبان‌های برنامه‌نویسی',
@@ -980,10 +940,10 @@
                     exp_aeronext_pos: 'Full-Stack Developer · تهران',
                     exp_aeronext_desc: 'توسعه سامانه جامع مدیریت شرکت‌های هواپیمایی و فعالیت در بخش Audit Management با استفاده از .NET، Blazor و SQL Server.',
                     exp_sel2plus_date: 'اسفند ۱۴۰۴ – اکنون',
-                    exp_sel2plus_pos: 'Full-Stack Developer · Remote',
+                    exp_sel2plus_pos: 'Full-Stack Developer · Head of Technology',
                     exp_sel2plus_desc: 'فعالیت در حوزه توسعه وب، طراحی سایت و ارائه خدمات میزبانی هاست و سرور.',
                     exp_codepal_date: 'تیر ۱۴۰۴ – اکنون',
-                    exp_codepal_pos: 'Full-Stack Developer · Remote',
+                    exp_codepal_pos: 'Full-Stack Developer · Head of Technology',
                     exp_codepal_desc: 'مشارکت در توسعه و پیاده‌سازی یک پلتفرم تخصصی برای برنامه‌نویسان با تمرکز بر ایجاد تجربه‌ای کاربردی برای جامعه توسعه‌دهندگان.',
                     exp_lifeino_date: 'تیر ۱۴۰۵ – اکنون',
                     exp_lifeino_pos: 'Founder & Full-Stack Developer',
@@ -1005,7 +965,7 @@
                     lang_de: 'German',
                     social_title: 'Connect',
                     about_title: 'About Me',
-                    about_text: 'I am a young developer passionate about building software and digital products. On my learning and professional development path, I have gained experience with various web development technologies. I am interested in fast learning, creativity, and problem-solving. My goal is to become a skilled developer by continuously improving my technical skills and working on real projects, contributing to building useful and high-quality products.',
+                    about_text: 'I am a young developer passionate about building websites and digital products. On my learning and professional development path, I have gained experience with various web development technologies. I am interested in fast learning, creativity, and problem-solving. My goal is to become a skilled developer by continuously improving my technical skills and working on real projects, contributing to building useful and high-quality products.',
                     skills_title: 'Skills',
                     skill_frontend: 'Front-End',
                     skill_languages: 'Programming Languages',
@@ -1017,10 +977,10 @@
                     exp_aeronext_pos: 'Full-Stack Developer · Tehran',
                     exp_aeronext_desc: 'Developing a comprehensive airline management system, focusing on Audit Management using .NET, Blazor, and SQL Server.',
                     exp_sel2plus_date: 'Mar 2026 – Present',
-                    exp_sel2plus_pos: 'Full-Stack Developer · Remote',
+                    exp_sel2plus_pos: 'Full-Stack Developer · Head of Technology',
                     exp_sel2plus_desc: 'Involved in web development, website design, and hosting/server services.',
                     exp_codepal_date: 'Jul 2025 – Present',
-                    exp_codepal_pos: 'Full-Stack Developer · Remote',
+                    exp_codepal_pos: 'Full-Stack Developer · Head of Technology',
                     exp_codepal_desc: 'Contributing to the development of a specialized platform for programmers, focusing on creating a practical experience for the developer community.',
                     exp_lifeino_date: 'Jul 2026 – Present',
                     exp_lifeino_pos: 'Founder & Full-Stack Developer',
